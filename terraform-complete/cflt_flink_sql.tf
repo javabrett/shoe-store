@@ -12,6 +12,12 @@ resource "confluent_flink_statement" "create_shoe_customers_keyed" {
     resource.confluent_connector.datagen_orders,
     resource.confluent_flink_compute_pool.cc_flink_compute_pool
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -23,7 +29,7 @@ resource "confluent_flink_statement" "create_shoe_customers_keyed" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -47,6 +53,12 @@ resource "confluent_flink_statement" "create_shoe_products_keyed" {
     resource.confluent_connector.datagen_orders,
     resource.confluent_flink_compute_pool.cc_flink_compute_pool
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -58,7 +70,7 @@ resource "confluent_flink_statement" "create_shoe_products_keyed" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -76,6 +88,12 @@ resource "confluent_flink_statement" "insert_shoe_customers_keyed" {
   depends_on = [
     resource.confluent_flink_statement.create_shoe_customers_keyed
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -87,7 +105,7 @@ resource "confluent_flink_statement" "insert_shoe_customers_keyed" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -105,6 +123,12 @@ resource "confluent_flink_statement" "insert_shoe_products_keyed" {
   depends_on = [
     resource.confluent_flink_statement.create_shoe_products_keyed
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -116,7 +140,7 @@ resource "confluent_flink_statement" "insert_shoe_products_keyed" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -142,6 +166,12 @@ resource "confluent_flink_statement" "create_shoe_order_customer" {
     resource.confluent_flink_statement.create_shoe_products_keyed,
     resource.confluent_flink_statement.create_shoe_customers_keyed
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -153,7 +183,7 @@ resource "confluent_flink_statement" "create_shoe_order_customer" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -171,6 +201,12 @@ resource "confluent_flink_statement" "insert_shoe_order_customer" {
   depends_on = [
     resource.confluent_flink_statement.create_shoe_order_customer
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -182,7 +218,7 @@ resource "confluent_flink_statement" "insert_shoe_order_customer" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -209,6 +245,12 @@ resource "confluent_flink_statement" "create_shoe_order_customer_product" {
     resource.confluent_flink_statement.create_shoe_customers_keyed,
     resource.confluent_flink_statement.create_shoe_order_customer
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -220,7 +262,7 @@ resource "confluent_flink_statement" "create_shoe_order_customer_product" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -238,6 +280,12 @@ resource "confluent_flink_statement" "insert_shoe_order_customer_product" {
   depends_on = [
     resource.confluent_flink_statement.create_shoe_order_customer_product
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -249,7 +297,7 @@ resource "confluent_flink_statement" "insert_shoe_order_customer_product" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -277,6 +325,12 @@ resource "confluent_flink_statement" "create_shoe_loyalty_levels" {
     resource.confluent_flink_statement.create_shoe_order_customer,
     resource.confluent_flink_statement.create_shoe_order_customer_product
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -288,7 +342,7 @@ resource "confluent_flink_statement" "create_shoe_loyalty_levels" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -306,6 +360,12 @@ resource "confluent_flink_statement" "insert_shoe_loyalty_levels" {
   depends_on = [
     resource.confluent_flink_statement.create_shoe_loyalty_levels
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -317,7 +377,7 @@ resource "confluent_flink_statement" "insert_shoe_loyalty_levels" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -346,6 +406,12 @@ resource "confluent_flink_statement" "create_shoe_promotions" {
     resource.confluent_flink_statement.create_shoe_order_customer_product,
     resource.confluent_flink_statement.create_shoe_loyalty_levels
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -357,7 +423,7 @@ resource "confluent_flink_statement" "create_shoe_promotions" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
@@ -375,6 +441,12 @@ resource "confluent_flink_statement" "insert_shoe_promotion" {
   depends_on = [
     resource.confluent_flink_statement.create_shoe_promotions
   ]    
+  organization {
+    id = data.confluent_organization.ccloud.id
+  }
+  environment {
+    id = confluent_environment.cc_handson_env.id
+  }
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -386,7 +458,7 @@ resource "confluent_flink_statement" "insert_shoe_promotion" {
     "sql.current-catalog"  = confluent_environment.cc_handson_env.display_name
     "sql.current-database" = confluent_kafka_cluster.cc_kafka_cluster.display_name
   }
-  rest_endpoint   =  confluent_flink_compute_pool.cc_flink_compute_pool.rest_endpoint
+  rest_endpoint   =  data.confluent_flink_region.confluent_flink_region.rest_endpoint
   credentials {
     key    = confluent_api_key.env-manager-flink-api-key.id
     secret = confluent_api_key.env-manager-flink-api-key.secret
